@@ -1,0 +1,43 @@
+services:
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=SuperCr@zyPa55word  # Yup it's hardcoded. I know.
+      - MSSQL_PID=Developer
+    ports:
+      - "1433:1433"
+    healthcheck:
+      test: ["CMD-SHELL", "bash -c 'echo > /dev/tcp/127.0.0.1/1433'"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 20s
+    volumes:
+      - mssql_data:/var/opt/mssql
+    restart: unless-stopped
+
+  dotnet-introspector:
+    build:
+      context: .
+      dockerfile: Containerfile
+    user: "0:0"
+    security_opt:
+      - label=disable
+    ports:
+      - "5053:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:8080
+      - CONTAINER_CLI=docker
+      - CONTAINER_HOST=unix:///var/run/docker.sock
+      - Persistence__ConnectionString=Server=mssql,1433;Database=introspector;User Id=sa;Password=SuperCr@zyPa55word;TrustServerCertificate=True;Encrypt=True
+    volumes:
+      - ${DOCKER_SOCKET_PATH:-/var/run/docker.sock}:/var/run/docker.sock
+    depends_on:
+      mssql:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  mssql_data:

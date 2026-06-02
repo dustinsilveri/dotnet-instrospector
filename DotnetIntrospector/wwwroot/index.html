@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>.NET Introspector</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="ambient"></div>
+  <main class="shell">
+    <header class="hero">
+      <div class="topNav">
+        <a href="/" aria-current="page">Runtime Introspector</a>
+        <a href="/cwe.html">CWE Lookup</a>
+      </div>
+      <p class="eyebrow">docker + metadata scan</p>
+      <h1>.NET Runtime Namespace Introspector</h1>
+      <p class="sub">Select a runtime tag, pull the image, inspect assemblies, and browse discovered namespaces.</p>
+    </header>
+
+    <section class="controls card">
+      <label for="version">.NET Runtime Version</label>
+      <div class="row">
+        <select id="version"></select>
+        <button id="introspect">Pull & Introspect</button>
+        <button id="exportCsv">Export CSV</button>
+      </div>
+      <p class="status" id="status">Loading versions...</p>
+    </section>
+
+    <section class="summary card" id="summary" hidden>
+      <div class="stat">
+        <span class="label">Image</span>
+        <span class="value" id="image"></span>
+      </div>
+      <div class="stat">
+        <span class="label">Assemblies</span>
+        <span class="value" id="assemblyCount"></span>
+      </div>
+      <div class="stat">
+        <span class="label">Runtime Folders</span>
+        <span class="value" id="runtimeFolders"></span>
+      </div>
+    </section>
+
+    <section class="card" id="warningsSection" hidden>
+      <h2>Warnings</h2>
+      <ul id="warnings"></ul>
+    </section>
+
+    <section class="card" id="resultsSection" hidden>
+      <div class="resultsHeader">
+        <h2>Assemblies & Namespaces</h2>
+        <div class="selectorRow">
+          <select id="rootNamespace"></select>
+          <div id="drillLevels" class="drillLevels"></div>
+          <select id="typeSelector"></select>
+          <select id="memberSelector"></select>
+          <input id="filter" type="search" placeholder="Optional text filter..." />
+        </div>
+        <p class="selectorHelp">The middle menus drill into namespace segments only. Assembly names such as System.Console usually surface as classes under the System namespace, so use the class selector to reach Console.</p>
+        <p class="drillPath" id="drillPath">Path: (none)</p>
+        <p class="sourceLinks" id="sourceLinks" hidden>
+          Source:
+          <a id="sourceDotNetLink" href="#" target="_blank" rel="noopener noreferrer">source.dot.net</a>
+          |
+          <a id="sourceGitHubLink" href="#" target="_blank" rel="noopener noreferrer">GitHub runtime search</a>
+        </p>
+      </div>
+      <div id="results"></div>
+    </section>
+  </main>
+
+  <template id="assemblyTemplate">
+    <details class="assembly">
+      <summary>
+        <span class="assemblyName"></span>
+        <span class="meta"></span>
+      </summary>
+      <div class="assemblySource">
+        <p class="dll"></p>
+        <p class="path"></p>
+      </div>
+      <ul class="namespaces"></ul>
+    </details>
+  </template>
+
+  <script src="app.js" defer></script>
+</body>
+</html>

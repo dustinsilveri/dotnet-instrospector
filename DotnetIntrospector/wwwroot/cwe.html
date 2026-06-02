@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CWE Lookup | .NET Introspector</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="ambient"></div>
+  <main class="shell">
+    <header class="hero">
+      <div class="topNav">
+        <a href="/">Runtime Introspector</a>
+        <a href="/cwe.html" aria-current="page">CWE Lookup</a>
+      </div>
+      <p class="eyebrow">mitre cwe reference</p>
+      <h1>CWE Lookup</h1>
+      <p class="sub">Add CWE IDs to build your list. Entries persist until you explicitly delete them.</p>
+    </header>
+
+    <section class="controls card">
+      <label for="cweIds">Add CWE IDs</label>
+      <textarea id="cweIds" rows="4" placeholder="Example: 79, 89, 787"></textarea>
+      <div class="row">
+        <button id="lookupCwe">Add CWEs</button>
+      </div>
+      <p class="status" id="cweStatus">Enter IDs and click Add CWEs.</p>
+    </section>
+
+    <section class="card" id="cweWarningsSection" hidden>
+      <h2>Warnings</h2>
+      <ul id="cweWarnings"></ul>
+    </section>
+
+    <section class="card" id="cweTableSection" hidden>
+      <h2>CWE Results</h2>
+      <div class="tableWrap">
+        <table class="cweTable">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Source</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="cweTableBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="cwe.js" defer></script>
+</body>
+</html>

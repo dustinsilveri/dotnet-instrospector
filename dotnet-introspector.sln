@@ -1,0 +1,24 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotnetIntrospector", "DotnetIntrospector\DotnetIntrospector.csproj", "{874C6B4D-F75E-EC13-9027-AAB21D618F25}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{874C6B4D-F75E-EC13-9027-AAB21D618F25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{874C6B4D-F75E-EC13-9027-AAB21D618F25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{874C6B4D-F75E-EC13-9027-AAB21D618F25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{874C6B4D-F75E-EC13-9027-AAB21D618F25}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {09900F2F-BC1D-44AB-98C4-94171CFCF614}
+	EndGlobalSection
+EndGlobal
